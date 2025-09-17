@@ -1,7 +1,7 @@
 ---
 name: Peer Review
 about: Structured checklist for reviewing a classmate's Queen’s Student Page
-title: "Peer Review: <your name> reviewing <partner username>"
+title: "Peer Review: Michael Esho reviewing Kyan"
 labels: peer-review
 assignees: ''
 ---
