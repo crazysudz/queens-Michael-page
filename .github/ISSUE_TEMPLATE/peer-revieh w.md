@@ -6,9 +6,8 @@ labels: peer-review
 assignees: ''
 ---
 
-**Live URL:** https://<user>.github.io/queens-student-page/
-**Repo:** https://github.com/<user>/queens-student-page
-
+**Live URL:** https://crazysudz.github.io/queens-Michael-page/
+**Repo:** https://github.com/crazysudz/queens-Michael-page
 ### 1) Functionality
 - [ ] Page loads; links & images work.
 
