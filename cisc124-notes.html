@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>CISC 124 — Java Learning Notes</title>
+    <link rel="stylesheet" href="style.css"/>
+    <style>
+      /* Notes-specific styles */
+      .week-card {
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        background: #fafafa;
+      }
+      .week-card h3 {
+        color: var(--red, #aa1e22);
+        margin-top: 0;
+        font-size: 1.3rem;
+        border-bottom: 2px solid var(--gold, #f2a900);
+        padding-bottom: 0.4rem;
+      }
+      .week-card h4 {
+        color: var(--blue, #002d72);
+        margin-bottom: 0.4rem;
+      }
+      pre {
+        background: #1e1e1e;
+        color: #d4d4d4;
+        border-radius: 6px;
+        padding: 1rem;
+        overflow-x: auto;
+        font-size: 0.88rem;
+        line-height: 1.5;
+      }
+      code {
+        background: #f0f0f0;
+        color: #c7254e;
+        border-radius: 3px;
+        padding: 0.1em 0.35em;
+        font-size: 0.9em;
+      }
+      pre code {
+        background: none;
+        color: inherit;
+        padding: 0;
+        font-size: inherit;
+      }
+      .key-concept {
+        background: #fff8e1;
+        border-left: 4px solid var(--gold, #f2a900);
+        padding: 0.6rem 1rem;
+        margin: 0.8rem 0;
+        border-radius: 0 4px 4px 0;
+      }
+      .back-link {
+        display: inline-block;
+        margin-bottom: 1.5rem;
+        font-size: 0.95rem;
+      }
+      .toc {
+        background: #f5f8ff;
+        border: 1px solid #c8d8f8;
+        border-radius: 8px;
+        padding: 1rem 1.5rem;
+        margin-bottom: 2rem;
+      }
+      .toc h3 {
+        margin-top: 0;
+        color: var(--blue, #002d72);
+      }
+      .toc ol {
+        margin: 0;
+        padding-left: 1.5rem;
+      }
+      .toc li { margin: 0.3rem 0; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>CISC 124 — Introduction to Computing Science II</h1>
+    </header>
+    <main>
+      <a class="back-link" href="index.html">← Back to my page</a>
+
+      <p>
+        These notes cover the core Java concepts taught in CISC 124 at Queen's University.
+        Each week summarises the key ideas, important syntax, and worked code examples.
+      </p>
+
+      <!-- Table of Contents -->
+      <div class="toc">
+        <h3>Table of Contents</h3>
+        <ol>
+          <li><a href="#week1">Week 1 — From Python to Java: Hello World &amp; Basic Syntax</a></li>
+          <li><a href="#week2">Week 2 — Primitive Types, Variables &amp; Operators</a></li>
+          <li><a href="#week3">Week 3 — Control Flow: Conditionals &amp; Loops</a></li>
+          <li><a href="#week4">Week 4 — Methods &amp; Scope</a></li>
+          <li><a href="#week5">Week 5 — Arrays &amp; ArrayList</a></li>
+          <li><a href="#week6">Week 6 — Classes, Objects &amp; Encapsulation</a></li>
+          <li><a href="#week7">Week 7 — Inheritance, Polymorphism &amp; Interfaces</a></li>
+        </ol>
+      </div>
+
+      <!-- ===== WEEK 1 ===== -->
+      <div class="week-card" id="week1">
+        <h3>Week 1 — From Python to Java: Hello World &amp; Basic Syntax</h3>
+
+        <h4>Key Ideas</h4>
+        <ul>
+          <li>Java is a <strong>compiled, statically typed</strong> language — types are checked at compile time.</li>
+          <li>Every program lives inside a <strong>class</strong>, and execution starts in <code>public static void main(String[] args)</code>.</li>
+          <li>Java uses <strong>curly braces <code>{}</code></strong> for blocks (not indentation like Python).</li>
+          <li>Every statement ends with a <strong>semicolon <code>;</code></strong>.</li>
+          <li>Java is <strong>case-sensitive</strong> — <code>myVar</code> and <code>myvar</code> are different.</li>
+        </ul>
+
+        <div class="key-concept">
+          <strong>Compile vs. Run:</strong> <code>javac HelloWorld.java</code> compiles to bytecode;
+          <code>java HelloWorld</code> runs it on the JVM.
+        </div>
+
+        <h4>Hello World</h4>
+        <pre><code>public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}</code></pre>
+
+        <h4>Python → Java Quick Comparison</h4>
+        <ul>
+          <li><strong>Print:</strong> Python <code>print("hi")</code> → Java <code>System.out.println("hi");</code></li>
+          <li><strong>Comments:</strong> Python <code>#</code> → Java <code>//</code> (single-line) or <code>/* … */</code> (multi-line)</li>
+          <li><strong>No indentation enforcement</strong> — use curly braces instead</li>
+          <li><strong>Type declaration required:</strong> Python <code>x = 5</code> → Java <code>int x = 5;</code></li>
+        </ul>
+
+        <h4>User Input</h4>
+        <pre><code>import java.util.Scanner;
+
+public class ReadInput {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter your name: ");
+        String name = sc.nextLine();
+        System.out.println("Hello, " + name + "!");
+        sc.close();
+    }
+}</code></pre>
+      </div>
+
+      <!-- ===== WEEK 2 ===== -->
+      <div class="week-card" id="week2">
+        <h3>Week 2 — Primitive Types, Variables &amp; Operators</h3>
+
+        <h4>Primitive Types</h4>
+        <ul>
+          <li><code>int</code> — 32-bit integer (e.g. <code>42</code>)</li>
+          <li><code>long</code> — 64-bit integer (e.g. <code>10000000000L</code>)</li>
+          <li><code>double</code> — 64-bit floating-point (e.g. <code>3.14</code>)</li>
+          <li><code>float</code> — 32-bit floating-point (e.g. <code>3.14f</code>)</li>
+          <li><code>boolean</code> — <code>true</code> or <code>false</code></li>
+          <li><code>char</code> — single character in single quotes (e.g. <code>'A'</code>)</li>
+          <li><code>String</code> — not a primitive; an object (uppercase S)</li>
+        </ul>
+
+        <h4>Variable Declaration &amp; Assignment</h4>
+        <pre><code>int age = 20;
+double gpa = 3.85;
+boolean isEnrolled = true;
+char grade = 'A';
+String name = "Michael";
+
+// Constants use the 'final' keyword
+final double PI = 3.14159;</code></pre>
+
+        <h4>Arithmetic Operators</h4>
+        <ul>
+          <li><code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code> (modulus)</li>
+          <li>Integer division truncates: <code>7 / 2</code> → <code>3</code></li>
+          <li>Use a <code>double</code> operand to get a decimal result: <code>7.0 / 2</code> → <code>3.5</code></li>
+        </ul>
+
+        <h4>Type Casting</h4>
+        <pre><code>int a = 5;
+double b = (double) a;   // widening (safe)
+int c = (int) 9.99;      // narrowing — truncates to 9</code></pre>
+
+        <h4>String Operations</h4>
+        <pre><code>String s = "Hello";
+int len = s.length();           // 5
+String upper = s.toUpperCase(); // "HELLO"
+String sub = s.substring(1, 3); // "el"
+boolean eq = s.equals("Hello"); // true  (use .equals(), NOT ==)
+int pos = s.indexOf('l');       // 2
+String joined = s + " World";   // concatenation</code></pre>
+
+        <div class="key-concept">
+          <strong>Never compare Strings with <code>==</code>.</strong>
+          Use <code>.equals()</code> to compare String content; <code>==</code> checks if they are the exact same object in memory.
+        </div>
+      </div>
+
+      <!-- ===== WEEK 3 ===== -->
+      <div class="week-card" id="week3">
+        <h3>Week 3 — Control Flow: Conditionals &amp; Loops</h3>
+
+        <h4>if / else if / else</h4>
+        <pre><code>int score = 85;
+
+if (score >= 90) {
+    System.out.println("A");
+} else if (score >= 80) {
+    System.out.println("B");
+} else if (score >= 70) {
+    System.out.println("C");
+} else {
+    System.out.println("F");
+}</code></pre>
+
+        <h4>switch Statement</h4>
+        <pre><code>int day = 3;
+switch (day) {
+    case 1: System.out.println("Monday");    break;
+    case 2: System.out.println("Tuesday");   break;
+    case 3: System.out.println("Wednesday"); break;
+    default: System.out.println("Other");
+}</code></pre>
+
+        <h4>while Loop</h4>
+        <pre><code>int i = 0;
+while (i < 5) {
+    System.out.println("i = " + i);
+    i++;
+}</code></pre>
+
+        <h4>do-while Loop</h4>
+        <pre><code>int n = 0;
+do {
+    System.out.println("n = " + n);
+    n++;
+} while (n < 3);
+// Always executes at least once</code></pre>
+
+        <h4>for Loop</h4>
+        <pre><code>for (int j = 0; j < 10; j++) {
+    System.out.println(j);
+}
+
+// Enhanced for-each (iterating a collection)
+int[] numbers = {1, 2, 3, 4, 5};
+for (int num : numbers) {
+    System.out.println(num);
+}</code></pre>
+
+        <h4>break &amp; continue</h4>
+        <pre><code>for (int k = 0; k < 10; k++) {
+    if (k == 5) break;     // exits the loop entirely
+    if (k % 2 == 0) continue; // skips even numbers
+    System.out.println(k); // prints 1, 3
+}</code></pre>
+
+        <div class="key-concept">
+          <strong>Logical operators:</strong>
+          <code>&amp;&amp;</code> (AND), <code>||</code> (OR), <code>!</code> (NOT).
+          Short-circuit evaluation — Java stops early if the result is determined.
+        </div>
+      </div>
+
+      <!-- ===== WEEK 4 ===== -->
+      <div class="week-card" id="week4">
+        <h3>Week 4 — Methods &amp; Scope</h3>
+
+        <h4>Method Anatomy</h4>
+        <pre><code>// accessModifier  returnType  methodName(paramType param, …)
+public static int add(int a, int b) {
+    return a + b;
+}
+
+public static void greet(String name) {
+    System.out.println("Hello, " + name + "!");
+    // void methods don't return a value
+}</code></pre>
+
+        <h4>Calling Methods</h4>
+        <pre><code>int result = add(3, 7);      // result = 10
+greet("Michael");            // prints: Hello, Michael!</code></pre>
+
+        <h4>Method Overloading</h4>
+        <p>Multiple methods can share the same name if their parameter lists differ.</p>
+        <pre><code>public static int multiply(int a, int b) {
+    return a * b;
+}
+
+public static double multiply(double a, double b) {
+    return a * b;
+}
+
+public static int multiply(int a, int b, int c) {
+    return a * b * c;
+}</code></pre>
+
+        <h4>Scope</h4>
+        <ul>
+          <li>Variables declared inside a method are <strong>local</strong> — only accessible within that method.</li>
+          <li>Variables declared inside a block <code>{}</code> are only accessible within that block.</li>
+          <li><strong>Instance variables</strong> belong to an object (declared in the class body, outside methods).</li>
+          <li><strong>Static variables</strong> belong to the class itself.</li>
+        </ul>
+
+        <h4>Recursion Example</h4>
+        <pre><code>public static int factorial(int n) {
+    if (n <= 1) return 1;          // base case
+    return n * factorial(n - 1);   // recursive case
+}
+// factorial(5) → 5 * 4 * 3 * 2 * 1 = 120</code></pre>
+
+        <div class="key-concept">
+          <strong>Pass by value:</strong> Java always passes primitives by value (a copy).
+          Objects are passed by reference value — you can modify the object's fields, but not reassign the reference itself.
+        </div>
+      </div>
+
+      <!-- ===== WEEK 5 ===== -->
+      <div class="week-card" id="week5">
+        <h3>Week 5 — Arrays &amp; ArrayList</h3>
+
+        <h4>Arrays (Fixed Size)</h4>
+        <pre><code>// Declaration and allocation
+int[] scores = new int[5];          // {0, 0, 0, 0, 0}
+
+// Declaration with initialization
+String[] days = {"Mon", "Tue", "Wed", "Thu", "Fri"};
+
+// Access and update
+scores[0] = 95;
+System.out.println(scores[0]);      // 95
+System.out.println(days.length);    // 5 — note: .length not .length()</code></pre>
+
+        <h4>Iterating Arrays</h4>
+        <pre><code>int[] nums = {10, 20, 30, 40, 50};
+
+// Traditional for loop (use when you need the index)
+for (int i = 0; i < nums.length; i++) {
+    System.out.println("nums[" + i + "] = " + nums[i]);
+}
+
+// Enhanced for-each (simpler when you don't need the index)
+for (int n : nums) {
+    System.out.println(n);
+}</code></pre>
+
+        <h4>2D Arrays</h4>
+        <pre><code>int[][] matrix = {
+    {1, 2, 3},
+    {4, 5, 6},
+    {7, 8, 9}
+};
+
+// Access element at row 1, column 2:
+System.out.println(matrix[1][2]); // 6
+
+// Iterate with nested loops
+for (int row = 0; row < matrix.length; row++) {
+    for (int col = 0; col < matrix[row].length; col++) {
+        System.out.print(matrix[row][col] + " ");
+    }
+    System.out.println();
+}</code></pre>
+
+        <h4>ArrayList (Dynamic Size)</h4>
+        <pre><code>import java.util.ArrayList;
+
+ArrayList&lt;String&gt; courses = new ArrayList&lt;&gt;();
+
+courses.add("CISC 124");
+courses.add("MATH 112");
+courses.add("BLCK 200");
+
+System.out.println(courses.size());    // 3
+System.out.println(courses.get(0));    // "CISC 124"
+
+courses.remove("MATH 112");            // remove by value
+courses.remove(0);                     // remove by index
+
+// Iterate
+for (String c : courses) {
+    System.out.println(c);
+}</code></pre>
+
+        <div class="key-concept">
+          <strong>Array vs ArrayList:</strong>
+          Use <code>int[]</code> when the size is fixed and performance matters.
+          Use <code>ArrayList&lt;Integer&gt;</code> when you need to add/remove elements dynamically.
+          Note: <code>ArrayList</code> stores objects, so use wrapper types (<code>Integer</code>, <code>Double</code>, etc.).
+        </div>
+      </div>
+
+      <!-- ===== WEEK 6 ===== -->
+      <div class="week-card" id="week6">
+        <h3>Week 6 — Classes, Objects &amp; Encapsulation</h3>
+
+        <h4>Defining a Class</h4>
+        <pre><code>public class Student {
+
+    // Instance variables (fields) — private for encapsulation
+    private String name;
+    private int studentID;
+    private double gpa;
+
+    // Constructor
+    public Student(String name, int studentID, double gpa) {
+        this.name = name;
+        this.studentID = studentID;
+        this.gpa = gpa;
+    }
+
+    // Getters
+    public String getName()       { return name; }
+    public int getStudentID()     { return studentID; }
+    public double getGpa()        { return gpa; }
+
+    // Setters (with validation)
+    public void setGpa(double gpa) {
+        if (gpa >= 0.0 && gpa <= 4.3) {
+            this.gpa = gpa;
+        }
+    }
+
+    // toString — called automatically when printing the object
+    @Override
+    public String toString() {
+        return "Student[" + name + ", ID=" + studentID + ", GPA=" + gpa + "]";
+    }
+}</code></pre>
+
+        <h4>Creating and Using Objects</h4>
+        <pre><code>Student michael = new Student("Michael", 20123456, 3.8);
+System.out.println(michael.getName());    // Michael
+System.out.println(michael);             // Student[Michael, ID=20123456, GPA=3.8]
+michael.setGpa(3.9);
+System.out.println(michael.getGpa());     // 3.9</code></pre>
+
+        <h4>Encapsulation Principles</h4>
+        <ul>
+          <li>Declare fields <code>private</code> — prevents direct external access.</li>
+          <li>Provide <code>public</code> getters and setters to control access.</li>
+          <li>Setters can validate data before storing it.</li>
+        </ul>
+
+        <h4>Static vs Instance</h4>
+        <pre><code>public class Counter {
+    private static int count = 0;   // shared by ALL Counter objects
+    private int id;                 // unique to each Counter object
+
+    public Counter() {
+        count++;
+        this.id = count;
+    }
+
+    public static int getCount() { return count; }
+    public int getId()           { return id; }
+}
+
+Counter a = new Counter(); // count = 1, a.id = 1
+Counter b = new Counter(); // count = 2, b.id = 2
+System.out.println(Counter.getCount()); // 2</code></pre>
+
+        <div class="key-concept">
+          <strong>this keyword:</strong> Refers to the current object. Use it to distinguish between
+          a field and a parameter with the same name (e.g. <code>this.name = name;</code>).
+        </div>
+      </div>
+
+      <!-- ===== WEEK 7 ===== -->
+      <div class="week-card" id="week7">
+        <h3>Week 7 — Inheritance, Polymorphism &amp; Interfaces</h3>
+
+        <h4>Inheritance (<code>extends</code>)</h4>
+        <p>A subclass inherits the fields and methods of its superclass and can add or override them.</p>
+        <pre><code>// Superclass
+public class Animal {
+    protected String name;
+
+    public Animal(String name) {
+        this.name = name;
+    }
+
+    public void speak() {
+        System.out.println(name + " makes a sound.");
+    }
+
+    public String toString() {
+        return "Animal(" + name + ")";
+    }
+}
+
+// Subclass
+public class Dog extends Animal {
+
+    private String breed;
+
+    public Dog(String name, String breed) {
+        super(name);   // calls Animal constructor
+        this.breed = breed;
+    }
+
+    @Override
+    public void speak() {
+        System.out.println(name + " says: Woof!");
+    }
+
+    public String getBreed() { return breed; }
+}</code></pre>
+
+        <h4>Using Inheritance</h4>
+        <pre><code>Dog d = new Dog("Rex", "Labrador");
+d.speak();                    // Rex says: Woof!
+System.out.println(d.name);   // Rex (inherited from Animal — protected)</code></pre>
+
+        <h4>Polymorphism</h4>
+        <p>A superclass reference can hold a subclass object. The correct overridden method is called at runtime.</p>
+        <pre><code>Animal[] animals = {
+    new Animal("Generic"),
+    new Dog("Buddy", "Poodle"),
+};
+
+for (Animal a : animals) {
+    a.speak();
+    // Generic → "Generic makes a sound."
+    // Dog    → "Buddy says: Woof!"
+}</code></pre>
+
+        <h4>Abstract Classes</h4>
+        <pre><code>public abstract class Shape {
+    // Abstract method — no body; subclasses MUST implement it
+    public abstract double area();
+
+    // Concrete method — shared by all shapes
+    public void printArea() {
+        System.out.printf("Area = %.2f%n", area());
+    }
+}
+
+public class Circle extends Shape {
+    private double radius;
+    public Circle(double radius) { this.radius = radius; }
+
+    @Override
+    public double area() {
+        return Math.PI * radius * radius;
+    }
+}
+
+public class Rectangle extends Shape {
+    private double width, height;
+    public Rectangle(double w, double h) { width = w; height = h; }
+
+    @Override
+    public double area() {
+        return width * height;
+    }
+}</code></pre>
+
+        <h4>Interfaces (<code>interface</code> / <code>implements</code>)</h4>
+        <p>An interface defines a contract — any class that implements it must provide all listed methods.</p>
+        <pre><code>public interface Printable {
+    void print();          // implicitly public abstract
+}
+
+public interface Saveable {
+    void save(String filename);
+}
+
+// A class can implement multiple interfaces
+public class Document implements Printable, Saveable {
+    private String content;
+
+    public Document(String content) { this.content = content; }
+
+    @Override
+    public void print() {
+        System.out.println(content);
+    }
+
+    @Override
+    public void save(String filename) {
+        System.out.println("Saving to " + filename);
+    }
+}</code></pre>
+
+        <h4>Interface vs Abstract Class</h4>
+        <ul>
+          <li>Use an <strong>interface</strong> to define a behaviour contract. A class can implement <em>many</em> interfaces.</li>
+          <li>Use an <strong>abstract class</strong> when sharing common code among related classes. A class can only <em>extend one</em> class.</li>
+          <li>From Java 8+, interfaces can have <code>default</code> method implementations.</li>
+        </ul>
+
+        <h4><code>instanceof</code> Check</h4>
+        <pre><code>Animal a = new Dog("Max", "Husky");
+
+if (a instanceof Dog) {
+    Dog d = (Dog) a;   // safe downcast
+    System.out.println("Breed: " + d.getBreed());
+}</code></pre>
+
+        <div class="key-concept">
+          <strong>Key OOP Pillars:</strong>
+          <em>Encapsulation</em> — hide data with private fields;
+          <em>Inheritance</em> — reuse code with <code>extends</code>;
+          <em>Polymorphism</em> — one interface, many implementations;
+          <em>Abstraction</em> — hide complexity behind abstract classes/interfaces.
+        </div>
+      </div>
+
+      <p style="text-align:center; color:#888; font-size:0.85rem; margin-top:2rem;">
+        CISC 124 Notes — Queen's University School of Computing
+      </p>
+    </main>
+  </body>
+</html>
